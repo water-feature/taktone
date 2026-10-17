@@ -2,12 +2,11 @@
 
 taktone runs the Digitakt mk1 OS on original Digitone mk1 hardware. TT1A supplies the core crossport: button and LED translation, Digitone codec initialization, external audio I/O and shutdown autosave. The second ColdFire is idle in this build. The extensions package documents [secondary CPU and Sophie integration](../taktone-extensions/docs/SECONDARY-CPU.md).
 
-NOTE/KEYBOARD and T1–T4 are unassigned. Shutdown autosave is enabled.
+NOTE/KEYBOARD and T1–T4 are unassigned.
 
 ## Build
 
-Requires **Python 3.12 or later only**, using its standard library. No pip packages, Ghidra, Java, compiler, emulator or network connection are required.
-
+Requires **Python 3.12 or later only**, using its standard library.
 Place your two stock firmware files in this repository's `firmware/` folder, using these exact filenames:
 
 ```text
@@ -29,7 +28,7 @@ Use the exact stock SysEx files below. The patcher checks both complete-file SHA
 | Digitakt OS 1.53 | `9bdd44bb6102fb25c143cfab97bc92b7a89c463f795d3112dce89771e29bcc92` |
 | Digitone / Digitone Keys OS 1.43 | `c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa` |
 
-The stock Digitone download has Keys in its filename; this crossport supports the **original Digitone mk1 only**. Digitone Keys and the mk2 instruments are excluded.
+The stock Digitone download has Keys in its filename; Digitone Keys is untested.
 
 The patcher reads the stock inputs directly, applies bundled `internal/patch-data.json`, and writes both verified SysEx files plus `build-report.json` to `firmware/`. Use `--out output` to choose another directory. The patch data contains references to stock bytes and compressed replacement bytes; it does not include complete firmware. Both generated files must match the release hashes before either is written. Run Python without `-O`.
 
@@ -51,7 +50,6 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 | `TT1A.syx` | `4b9d0370c10a9f9ab14423a8a3f6990984f394c155958695a8bd0c59f7567c26` |
 | `TT1A-recovery.syx` | `09f8a92efb2e350540e08a2f022a72ffbbf1a1f5f378faa76987461714fb5e4d` |
 
-Hardware testing of this release has not been performed.
 
 ## Develop
 
