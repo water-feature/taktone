@@ -43,10 +43,11 @@ def main():
     args.out.mkdir(parents=True,exist_ok=True)
     outputs = {}
     for path in sorted((ROOT/'candidates').glob(OUTPUT_GLOB)):
-        target = args.out/path.name
+        name = 'taktone-extended-'+path.name
+        target = args.out/name
         if path.resolve() != target.resolve():
             shutil.copyfile(path,target)
-        outputs[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
+        outputs[name] = hashlib.sha256(path.read_bytes()).hexdigest()
     if len(outputs) != 2:
         raise RuntimeError('Expected both recovery and running-XDT envelopes')
     report = dict(version=VERSION, variant="no-panel-diagnostics", input_sha256=EXPECTED, output_sha256=outputs,

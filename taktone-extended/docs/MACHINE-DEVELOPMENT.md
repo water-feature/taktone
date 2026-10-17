@@ -2,7 +2,7 @@
 
 Keep the instrument integration on the main CPU and synthesis state/rendering on the secondary. Main has the sequencer, parameter locks, LFOs, machine menu, sound storage and downstream processing. Secondary receives a complete control snapshot and produces one block of PCM for each selected voice.
 
-For a complete compiling example, use the standalone extensions package. It builds TT2D from stock firmware and includes the loader, shared protocol, machine registration, parameter UI, source substitution, scenes and Sophie engine. The [secondary-link reference](../internal/reference/secondary-link/README.md) isolates the transport assembly for reuse without requiring Sophie synthesis. See [secondary CPU and Sophie integration](SECONDARY-CPU.md) for the complete data flow.
+For a complete compiling example, use the standalone extensions package. It builds the complete extended firmware from stock inputs and includes the loader, shared protocol, machine registration, parameter UI, source substitution, scenes and Sophie engine. The [secondary-link reference](../internal/reference/secondary-link/README.md) isolates the transport assembly for reuse without requiring Sophie synthesis. See [secondary CPU and Sophie integration](SECONDARY-CPU.md) for the complete data flow.
 
 ## Implementation contract
 
@@ -12,7 +12,7 @@ For a complete compiling example, use the standalone extensions package. It buil
 4. Define a versioned wire layout with explicit widths, alignment, deterministic padding, sequence ownership and completion. Check C layouts with static assertions. Build controls locally and publish aligned shared longwords with readback; checksum intended words. Add input PCM only if the engine needs it. Do not enlarge shared storage based solely on emulator mappings.
 5. Register a machine ID, descriptor and parameter map on main. Persist selection with native sound/kit data. Supply defaults, formatters, discrete/bipolar ranges and every UI range path, including scenes. All eight knobs are available for synthesis; a dedicated status slot is optional.
 6. Read native effective parameters after modulation. Capture trigger state before native source processing consumes it. Substitute secondary PCM at the existing voice source boundary and retain filter/AMP/mix/FX. Test pitch, velocity, gate, release, machine switching and sample coexistence.
-7. Specify late-output behavior and track ownership. TT2D uses silence for failed custom voices, one outstanding packet, per-block miss counters and shutdown after 64 consecutive misses. Pending triggers coalesce; they are not an unbounded event queue. Another design may need explicit queuing and ping-pong buffers.
+7. Specify late-output behavior and track ownership. Taktone-extended uses silence for failed custom voices, one outstanding packet, per-block miss counters and shutdown after 64 consecutive misses. Pending triggers coalesce; they are not an unbounded event queue. Another design may need explicit queuing and ping-pong buffers.
 
 ## Key integration rules
 

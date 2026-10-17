@@ -17,7 +17,7 @@ Update `internal/release.json` with the source build’s version and output hash
 ```sh
 python3 internal/export_patch.py --digitakt firmware/Digitakt_OS1.53.syx \
   --digitone firmware/Digitone_and_Digitone_Keys_OS1.43.syx \
-  --candidate firmware/TT2D-recovery.syx
+  --candidate firmware/taktone-extended-TT2D-recovery.syx
 ```
 
 The exporter round-trips the recipe against the candidate image. Run `patch.py` to confirm both output hashes match. Audit and qualify changed firmware before assigning it release status. Modifying a recipe without updating its pinned image/output hashes is rejected.

@@ -7,8 +7,8 @@
     "digitone": "c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa"
   },
   "output_sha256": {
-    "TT2D-recovery.syx": "e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9",
-    "TT2D.syx": "67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27"
+    "taktone-extended-TT2D-recovery.syx": "e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9",
+    "taktone-extended-TT2D.syx": "67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27"
   },
   "hardware_validation": "Project author confirmed scene initialization and scene-held encoder-push lock clearing on hardware."
 }

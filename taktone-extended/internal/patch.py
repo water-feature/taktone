@@ -39,7 +39,7 @@ def main():
     print('Packing '+recipe['version']+'...',flush=True)
     raw=syx.write(dn,pack_section(image),DEV,version=recipe['version'])
     outputs={};checks={}
-    stem=recipe['version']
+    stem='taktone-extended-'+recipe['version']
     for suffix,data,reference in [('recovery',raw,dn),
             ('from-XDT',rewrap(syx.Syx(raw),dt),syx.Syx(rewrap(dn,dt)))]:
         name=stem+('-recovery' if suffix=='recovery' else '')+'.syx'

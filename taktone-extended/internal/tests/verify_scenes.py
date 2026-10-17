@@ -21,7 +21,8 @@ u = Uc(UC_ARCH_M68K, UC_MODE_BIG_ENDIAN)
 u.ctl_set_cpu_model(UC_CPU_M68K_CFV4E)
 u.mem_map(0x40000000, 0x8000000)
 u.mem_map(0x80000000, 0x10000)
-u.mem_write(BASE, syx.Syx.load(ROOT.parent / 'firmware/TT2D-recovery.syx').section(3))
+release=json.loads((ROOT/'release.json').read_text())['release']
+u.mem_write(BASE, syx.Syx.load(ROOT.parent / ('firmware/taktone-extended-'+release+'-recovery.syx')).section(3))
 u.mem_write(CODE, (ROOT / 'candidates/macro-runtime/runtime.bin').read_bytes())
 STACK, STOP = 0x47fff000, 0x40001000
 

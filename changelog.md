@@ -13,6 +13,12 @@ TT1 versions identify the core firmware; TT2 versions identify the extensions fi
 
 The user reported four supplied 1.53-based modified builds working on hardware. The 1.54 profile passed source/recipe, container and synthetic loader checks; no independently produced 1.54 mod, 1.54 hardware or Outbox qualification is claimed.
 
+## Extended output naming — 2026-10-18
+
+- Name the extended outputs `taktone-extended-TT2D.syx` and `taktone-extended-TT2D-recovery.syx`.
+- Keep TT2D as the boot version and changelog identifier; remove it as a product name in the extended README and feature guides.
+- Firmware contents and release hashes are unchanged.
+
 ## TT2D — 2026-10-17
 
 - Route scene-held encoder presses through the focused parameter page’s native key handler, instead of using a widget cached during drawing.

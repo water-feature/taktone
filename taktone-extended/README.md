@@ -1,6 +1,6 @@
-# taktone extended — TT2D
+# taktone extended
 
-Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2D firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
+Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
 
 SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
@@ -34,12 +34,12 @@ These packages target the original Digitone. The stock download has Keys in its 
 `patch.py` verifies the stock inputs, reconstructs the application using bundled `internal/patch-data.json`, and verifies both firmware envelopes against the exact release hashes before writing them. Unchanged firmware bytes, including the secondary loader and FPGA-containing secondary image, are copied from the user's stock inputs. The patch data stores source-copy references and compressed replacement bytes, not complete firmware files. Inputs are read directly without making local copies.
 
 
-Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Run without Python `-O`.
+Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. The version in each filename matches the version shown on the boot screen. Run without Python `-O`.
 
 | Output | Receiver |
 | --- | --- |
-| `TT2D.syx` | Already running XDT firmware, including Elektron Transfer over USB |
-| `TT2D-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
+| `taktone-extended-<version>.syx` | Already running XDT firmware, including Elektron Transfer over USB |
+| `taktone-extended-<version>-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
 
 Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; stock Digitone project conversion/preservation is not established, and sample-volume formatting can erase data.
 
@@ -49,8 +49,8 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 
 | Output | SHA-256 |
 | --- | --- |
-| `TT2D.syx` | `67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27` |
-| `TT2D-recovery.syx` | `e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9` |
+| `taktone-extended-<version>.syx` | `67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27` |
+| `taktone-extended-<version>-recovery.syx` | `e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9` |
 
 Project author confirmed scene initialization and scene-held encoder-push lock clearing on hardware.
 
@@ -58,7 +58,7 @@ Project author confirmed scene initialization and scene-held encoder-push lock c
 
 The panel uses Digitakt actions on the Digitone’s printed buttons:
 
-| Digitone control | TT2D action |
+| Digitone control | Action |
 | --- | --- |
 | MIDI | TRK / track selection |
 | SYN1 | SRC / source page |
