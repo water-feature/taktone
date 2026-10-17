@@ -1,6 +1,6 @@
 # Secondary CPU and Sophie integration
 
-The original Digitone already contains the second CPU, shared-memory bridge and FPGA. “Connecting” it means bringing up those existing interfaces from Digitakt main firmware; no added chip or wiring modification is part of this project. TT2B uses it to render eight Sophie voices. Main runs the Digitakt sequencer, modulation, track UI and downstream audio processing; the secondary receives control snapshots and returns voice audio. TT1A leaves the secondary idle.
+The original Digitone already contains the second CPU, shared-memory bridge and FPGA. “Connecting” it means bringing up those existing interfaces from Digitakt main firmware; no added chip or wiring modification is part of this project. TT2D uses it to render eight Sophie voices. Main runs the Digitakt sequencer, modulation, track UI and downstream audio processing; the secondary receives control snapshots and returns voice audio. TT1A leaves the secondary idle.
 
 
 ## How Sophie is integrated

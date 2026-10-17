@@ -1,12 +1,12 @@
 # Scenes
 
-Each pattern has four scenes, on physical T1–T4. A scene holds absolute targets across audio tracks. All four scenes start enabled with no learned targets. Existing saved enabled states are restored on load. Disable a scene with FUNC+T before learning if you want to learn silently. An enabled scene applies while its T button is held; release returns to the current sequencer values, including parameter locks that changed during the hold.
+Each pattern has four scenes, on physical T1–T4. A scene holds absolute targets across audio tracks. All four scenes start enabled with no learned targets. Untouched empty scenes also default to enabled when loading existing projects. Scenes with learned targets retain their saved enabled state; explicit toggles and scene clears are saved. Disable a scene with FUNC+T before learning if you want to learn silently. An enabled scene applies while its T button is held; release returns to the current sequencer values, including parameter locks that changed during the hold.
 
 | Gesture | Result |
 | --- | --- |
 | Hold T1–T4 and turn A–H on a supported sound page | Learn or edit targets |
 | Hold FUNC before pressing T1–T4 | Toggle scene enabled state |
-| Hold scene + encoder push | Clear that parameter's lock |
+| Hold scene + press encoder A–H | Clear that parameter's scene lock on SRC, FLTR, AMP or LFO |
 | Hold scene + PLAY | Clear and disable that scene |
 | Hold scene + REC | Copy the complete scene |
 | Hold destination scene + STOP | Replace it with the copied scene |

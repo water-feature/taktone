@@ -17,9 +17,27 @@ Update `internal/release.json` with the source build’s version and output hash
 ```sh
 python3 internal/export_patch.py --digitakt firmware/Digitakt_OS1.53.syx \
   --digitone firmware/Digitone_and_Digitone_Keys_OS1.43.syx \
-  --candidate firmware/TT2B-recovery.syx
+  --candidate firmware/TT2D-recovery.syx
 ```
 
 The exporter round-trips the recipe against the candidate image. Run `patch.py` to confirm both output hashes match. Audit and qualify changed firmware before assigning it release status. Modifying a recipe without updating its pinned image/output hashes is rejected.
 
 A recipe consists of copies from hashed stock sections and zlib-compressed replacement runs. The embedded secondary loader and stock portions of the secondary program are copied from the user's Digitone sections 6 and 7. The published source package excludes firmware inputs, compiled candidates and intermediate files. Keep user-supplied stock inputs in `firmware/` locally.
+
+## Scene regression checks
+
+After a source build, developers with the optional `unicorn` Python package can run:
+
+```sh
+python3 internal/tests/verify_scenes.py
+```
+
+These checks execute the emitted ColdFire runtime with native API stand-ins. They cover startup defaults, loading an existing sparse project, checksum rejection, saved scene states, encoder-push lock clearing for A–H, and grid invalidation on page redraws. They do not require firmware on an instrument.
+
+For the native page-dispatch regression, use a local `macros-xdt15-restored` `gui.snap` capture:
+
+```sh
+python3 internal/tests/verify_native_scene_pages.py /path/to/gui.snap
+```
+
+This replay uses the captured SRC, FLTR, AMP and LFO widgets, native key-event construction and native UI dispatch. It tests A–H on every page with no cached grid. Snapshot contents stay local and are not included in this repository.

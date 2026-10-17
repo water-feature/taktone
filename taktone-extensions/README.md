@@ -1,9 +1,8 @@
-# taktone extensions — TT2B
+# taktone extensions — TT2D
 
-Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2B firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
+Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2D firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
 
-
-SYN2 is unassigned. All four scenes start enabled on new or cleared patterns; saved enabled states are preserved.
+SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
 ## Build
 
@@ -39,8 +38,8 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Ru
 
 | Output | Receiver |
 | --- | --- |
-| `TT2B.syx` | Already running XDT firmware, including Elektron Transfer over USB |
-| `TT2B-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
+| `TT2D.syx` | Already running XDT firmware, including Elektron Transfer over USB |
+| `TT2D-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
 
 Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; stock Digitone project conversion/preservation is not established, and sample-volume formatting can erase data.
 
@@ -50,10 +49,10 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 
 | Output | SHA-256 |
 | --- | --- |
-| `TT2B.syx` | `dddf87caee6ecb20ab0e481a53d1e824d253a9d8ba9518affc7a190ba75d35a8` |
-| `TT2B-recovery.syx` | `3e67a80898a879e5a71474e25d384d721d95d3fec3296a8f91fda1fef9b4e1b7` |
+| `TT2D.syx` | `67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27` |
+| `TT2D-recovery.syx` | `e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9` |
 
-Hardware testing of this release has not been performed.
+Project author confirmed scene initialization and scene-held encoder-push lock clearing on hardware.
 
 ## Use and develop
 

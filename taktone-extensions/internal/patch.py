@@ -52,7 +52,8 @@ def main():
     report=dict(version=recipe['version'],variant=release['variant'],input_sha256=EXPECTED,
                 output_sha256={name:sha(data) for name,data in outputs.items()},
                 verification='Stock round trips, patch image, both containers and exact release hashes passed',
-                hardware_tested=False,container_checks=checks)
+                hardware_tested=release.get('hardware_tested',False),
+                hardware_validation=release.get('hardware_validation'),container_checks=checks)
     (args.out/'build-report.json').write_text(json.dumps(report,indent=2)+'\n')
     print('Created '+', '.join(outputs)+' in '+str(args.out.resolve()))
 

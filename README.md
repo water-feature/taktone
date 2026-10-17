@@ -2,10 +2,12 @@
 
 Two standalone source packages for running Digitakt 1 firmware on Digitone 1 hardware.
 
+See the [changelog](changelog.md) for version history and release status.
+
 | Package | Contents |
 | --- | --- |
 | [taktone-core](taktone-core/README.md) | TT1A - core hardware architecture, clean platform for further mods.  |
-| [taktone-extensions](taktone-extensions/README.md) | TT2B - the above plus 4x scenes and 2nd coldfire proof of concept (digisophie machine) |
+| [taktone-extensions](taktone-extensions/README.md) | TT2D - the above plus 4x scenes and 2nd coldfire proof of concept (digisophie machine) |
 |   |   |
 
 Both end-user patchers require only Python and its standard library. Each builds from user-supplied Digitakt 1.53 and Digitone 1.43 firmware. No firmware binaries or Elektron code are included. Do not distribute patched firmware files; point to this repo instead.

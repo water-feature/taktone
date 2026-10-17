@@ -57,7 +57,9 @@ def make_macro_patch(original, reassemble=True):
         (0x4001669A,'4fefffe848d70c3c','macro_kit_save'),
         (0x400162A0,'4fefffe848d70c1c','macro_pattern_reload')]:
         replace(at,bytes.fromhex(before),b'\x4e\xf9'+struct.pack('>I',labels[name])+b'\x4e\x71',name)
-    for at,before,name in [(0x40031802,'4fefffb848d77cfc','macro_grid'),
+    for at,before,name in [(0x40033076,'4e56ffb048d73cfc','macro_grid_key'),
+        (0x4003B272,'4e56ffcc48d71cfc','macro_source_key'),
+        (0x40031802,'4fefffb848d77cfc','macro_grid'),
         (0x4003171c,'4fefffd848d70c04','macro_display')]:
         replace(at,bytes.fromhex(before),b'\x4e\xf9'+struct.pack('>I',labels[name])+b'\x4e\x71',name)
     needle=struct.pack('>I',0x400E88C0)

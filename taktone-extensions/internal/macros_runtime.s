@@ -208,6 +208,8 @@ key_clear_scene_word:
  move.l D0,(A0)+
  subq.l #1,D1
  bne.w @key_clear_scene_word
+ move.l #@SCENE_MAGIC,D0
+ move.l D0,(-1020,A0)
  addq.l #1,(@EDIT_SEQ).l
  jsr @macro_pointer
  jsr @macro_row_dirty
@@ -219,42 +221,13 @@ key_clear_play_release:
  move.l D0,(@PLAY_CONSUMED).l
  bra.w @key_taken
 key_encoder_range:
+ ; Encoder pushes must reach the native page dispatch. The grid wrapper
+ ; below receives the actual focused widget instead of a cached redraw.
  cmpi.l #40,D2
  blt.w @key_scene_range
  cmpi.l #47,D2
  bgt.w @key_scene_range
- tst.l (@HELD).l
- bmi.w @key_stock
- btst.l #0,D3
- beq.w @key_taken
- btst.l #3,D3
- bne.w @key_taken
- movea.l (@ACTIVE_WIDGET).l,A3
- tst.l A3
- beq.w @key_taken
- move.l D2,D0
- subi.l #40,D0
- move.l D0,-(SP)
- move.l A3,-(SP)
- movea.l (A3),A0
- movea.l (0x9c,A0),A0
- jsr (A0)
- addq.l #8,SP
- tst.l D0
- beq.w @key_taken
- move.l D0,D4
- addq.l #1,(@UI_DEPTH).l
- addq.l #1,(@CLEAR_DEPTH).l
- pea (-1).w
- move.l D4,-(SP)
- move.l A3,-(SP)
- movea.l (A3),A0
- movea.l (0x54,A0),A0
- jsr (A0)
- lea (12,SP),SP
- subq.l #1,(@CLEAR_DEPTH).l
- subq.l #1,(@UI_DEPTH).l
- bra.w @key_dirty
+ bra.w @key_stock
 key_scene_range:
  cmpi.l #49,D2
  blt.w @key_stock
@@ -309,6 +282,8 @@ key_toggle:
  eori.l #1,D0
  addq.l #1,(@EDIT_SEQ).l
  move.b D0,(A0)
+ move.l #@SCENE_MAGIC,D0
+ move.l D0,(4,A0)
  move.l A0,D0
  jsr @macro_row_dirty
  addq.l #1,(@EDIT_SEQ).l
@@ -338,6 +313,122 @@ key_stock:
  lea (40,SP),SP
  jmp 0x400084fe
 
+; Native parameter-page key entry, reached through its normal UI dispatch.
+macro_grid_key:
+ pea (@grid_key_original).l
+ bra.w @grid_key_common
+macro_source_key:
+ pea (@source_key_original).l
+grid_key_common:
+ lea (-40,SP),SP
+ movem.l { D2 D3 D4 D5 D6 D7 A2 A3 A4 A5},(SP)
+ movea.l (48,SP),A3
+ movea.l (52,SP),A2
+ move.l (12,A2),D2
+ move.l (16,A2),D3
+ tst.l (@HELD).l
+ bmi.w @grid_key_stock
+ cmpi.l #40,D2
+ blt.w @grid_key_stock
+ cmpi.l #47,D2
+ bgt.w @grid_key_stock
+ btst.l #0,D3
+ beq.w @grid_key_taken
+ btst.l #3,D3
+ bne.w @grid_key_taken
+ move.l D2,D0
+ subi.l #40,D0
+ move.l D0,-(SP)
+ move.l A3,-(SP)
+ movea.l (A3),A0
+ movea.l (0x9c,A0),A0
+ jsr (A0)
+ addq.l #8,SP
+ tst.l D0
+ beq.w @grid_key_taken
+ move.l D0,D4
+ ; Resolve the grid's actual provider, not its display/value getter. Some
+ ; native getter paths return values without entering our scene wrapper.
+ pea (-1).w
+ move.l D4,-(SP)
+ move.l A3,-(SP)
+ movea.l (A3),A0
+ movea.l (0xa4,A0),A0
+ jsr (A0)
+ lea (12,SP),SP
+ tst.l D0
+ beq.w @grid_key_taken
+ movea.l D0,A0
+ move.l (A0),D0
+ cmpi.l #0x4017eb58,D0
+ bne.w @grid_key_taken
+ move.l D4,-(SP)
+ jsr 0x40078d80
+ addq.l #4,SP
+ tst.l D0
+ bmi.w @grid_key_taken
+ cmpi.l #52,D0
+ bhi.w @grid_key_taken
+ move.l D0,D4
+ move.l (@TRACK).l,D0
+ cmpi.l #7,D0
+ bhi.w @grid_key_taken
+ moveq 53,D1
+ muls.l D1,D0
+ add.l D0,D4
+ jsr @macro_pointer
+ tst.l D0
+ beq.w @grid_key_taken
+ movea.l D0,A3
+ move.l (4,A3),D0
+ cmpi.l #@SCENE_MAGIC,D0
+ bne.w @grid_key_taken
+ move.l D4,D0
+ lsr.l #3,D0
+ lea (8,A3),A0
+ adda.l D0,A0
+ moveq 7,D1
+ and.l D4,D1
+ addq.l #1,(@EDIT_SEQ).l
+ bclr.b D1,(A0)
+ lea (68,A3),A0
+ moveq 0,D0
+ move.w D0,(0,A0,D4*2)
+ move.l A3,D0
+ jsr @macro_row_dirty
+ addq.l #1,(@EDIT_SEQ).l
+ moveq 1,D0
+ move.l D0,(@DIRTY).l
+ jsr @macro_rebuild_overlay
+ moveq 1,D0
+ move.l D0,(@UI_DIRTY).l
+grid_key_taken:
+ movem.l (SP),{ D2 D3 D4 D5 D6 D7 A2 A3 A4 A5}
+ lea (44,SP),SP
+ moveq 1,D0
+ rts
+grid_key_stock:
+ movem.l (SP),{ D2 D3 D4 D5 D6 D7 A2 A3 A4 A5}
+ lea (40,SP),SP
+ rts
+
+grid_key_original:
+ ; Displaced LINK A6,-80 and MOVEM D2-D7/A2-A5.
+ lea (-4,SP),SP
+ move.l A6,(SP)
+ movea.l SP,A6
+ lea (-80,SP),SP
+ movem.l { D2 D3 D4 D5 D6 D7 A2 A3 A4 A5},(SP)
+ jmp 0x4003307e
+source_key_original:
+ ; Displaced LINK A6,-52 and MOVEM D2-D7/A2-A4.
+ lea (-4,SP),SP
+ move.l A6,(SP)
+ movea.l SP,A6
+ lea (-52,SP),SP
+ movem.l { D2 D3 D4 D5 D6 D7 A2 A3 A4},(SP)
+ jmp 0x4003b27a
+
 macro_encoder:
  lea (-8,SP),SP
  movem.l { D2 A2},(SP)
@@ -364,8 +455,14 @@ encoder_done:
  rts
 
 macro_draw:
+ ; Native drawing skips clean frames. Keep the last drawn parameter grid
+ ; until a real redraw replaces the page; otherwise push clearing loses it.
+ movea.l (4,SP),A0
+ tst.b (0x20,A0)
+ beq.w @draw_keep_widget
  moveq 0,D0
  move.l D0,(@ACTIVE_WIDGET).l
+draw_keep_widget:
  addq.l #1,(@UI_DEPTH).l
  move.l (8,SP),-(SP)
  move.l (8,SP),-(SP)

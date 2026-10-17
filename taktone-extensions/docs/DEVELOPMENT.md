@@ -84,13 +84,15 @@ Do not transplant stock-Digitone mod/buffer allocations: `0x43EC0000..0x44000000
 
 Scene capture requires both audio-track sound-provider identity and track 0–7. Numeric index alone cannot distinguish FX/master from an audio track. Unsupported providers keep native behavior. Silent editing intercepts the setter before ordinary stored-sound changes; contextual getters show learned values. Synthetic key IDs 49–52 have complete reverse-map entries, and FUNC state comes from the native physical key bitmap.
 
+Scene-held encoder pushes pass through native UI dispatch to wrappers at the shared parameter-page key handler (`0x40033076`) and SRC-specific handler (`0x4003B272`). Each wrapper receives the focused widget directly, resolves its encoder parameter and provider, verifies an audio-track sound provider, and clears only the corresponding scene bitmap bit and target. Clearing does not depend on draw-time grid caching or a display getter callback.
+
 The UI compiles a sparse immutable overlay, published through double buffering. The audio hook installs targets into native smoothing input and restores source shorts afterward. It does not perform disk I/O, rebuild the full table or bypass native smoothing. Release follows current sequencer values. Sophie-specific scene range lookup shares the normal UI adapter; otherwise borrowed native machine ranges can clamp valid engine controls.
 
 ## Scene storage format and transactions
 
 Each scene occupies 1,024 bytes: enabled state at +0, explicit `SCN3` edit marker at +4, 60-byte validity bitmap at +8, and 477 signed big-endian short targets at +68. Four scenes form a 4,096-byte pattern row; 128 rows form the 512 KiB table. The layout retains nine domains of 53 fields for compatibility; current capture admits only eight audio-track domains, with global FX/master unsupported.
 
-Native project/autosave slots are 4 MiB. Native serialization occupies 32 KiB chunks 0–110; extension commit header uses chunk 111, with sparse rows in 112–127 (eight occupied rows per data chunk). Header magic is `XMAC`, schema 4; valid schema-3 data can migrate. A reconstructed-table checksum and semantic checks validate data. Data precedes the header commit. This detects interrupted writes but is not redundant storage guaranteeing the previous on-disk checkpoint survives every interruption.
+Native project/autosave slots are 4 MiB. Native serialization occupies 32 KiB chunks 0–110; extension commit header uses chunk 111, with sparse rows in 112–127 (eight occupied rows per data chunk). Header magic is `XMAC`, schema 4; valid schema-3 data can migrate. A reconstructed-table checksum and semantic checks validate stored data before untouched marker-free scenes receive the enabled default. Explicit toggles and scene clears carry the edit marker, so their disabled state survives loading. Data precedes the header commit. This detects interrupted writes but is not redundant storage guaranteeing the previous on-disk checkpoint survives every interruption.
 
 Ordinary slots start at sector `0x80000 + slot*0x2000`; the temporary project starts at `0x7E000`; autosaves at `0x7A000`/`0x7C000`. Project UUID is an identity, not a physical slot number. Schema 4 binds to native project UUID within the slot rather than hashing the whole packed native project.
 

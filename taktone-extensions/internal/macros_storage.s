@@ -46,6 +46,27 @@ enable_empty_scene:
  bne.w @enable_empty_scene
  rts
 
+; A4=validated table. Marker-free records contain no targets; make them
+; enabled by default, including empty rows omitted by sparse storage.
+; Preserve the checksum/header pointers and all caller registers.
+macro_default_unedited_scenes:
+ lea (-12,SP),SP
+ movem.l { D0 D1 A0},(SP)
+ movea.l A4,A0
+ move.l #512,D1
+default_unedited_scene:
+ move.l (4,A0),D0
+ bne.w @default_unedited_next
+ moveq 1,D0
+ move.b D0,(A0)
+default_unedited_next:
+ lea (1024,A0),A0
+ subq.l #1,D1
+ bne.w @default_unedited_scene
+ movem.l (SP),{ D0 D1 A0}
+ lea (12,SP),SP
+ rts
+
 macro_project_slot:
  cmpi.l #128,D0
  bhi.w @project_slot_bad
@@ -336,6 +357,9 @@ load_unpack:
  jsr @macro_checksum_buffer
  cmp.l (12,A2),D0
  bne.w @load_error
+ ; Validate the stored bytes and checksum first, then apply defaults to
+ ; untouched empty records. Explicit toggles/clears carry SCENE_MAGIC.
+ jsr @macro_default_unedited_scenes
  ; Publication is explicit here, after all structural/checksum checks.
  cmpi.l #@TABLE,D5
  bne.w @load_publish_ready
