@@ -1,0 +1,13 @@
+{
+  "release": "TT1A",
+  "variant": "note-led-free",
+  "hardware_tested": false,
+  "input_sha256": {
+    "digitakt": "9bdd44bb6102fb25c143cfab97bc92b7a89c463f795d3112dce89771e29bcc92",
+    "digitone": "c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa"
+  },
+  "output_sha256": {
+    "TT1A.syx": "4b9d0370c10a9f9ab14423a8a3f6990984f394c155958695a8bd0c59f7567c26",
+    "TT1A-recovery.syx": "09f8a92efb2e350540e08a2f022a72ffbbf1a1f5f378faa76987461714fb5e4d"
+  }
+}

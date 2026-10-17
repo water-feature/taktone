@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+/firmware/*
+!/firmware/.gitkeep
+/internal/candidates/
+/dist/
+*.syx
+*.bin
+*.o
+*.elf
+*.elemod
+*.gpr
+*.rep/
+/internal/reports/*
+!/internal/reports/panel-dn.json

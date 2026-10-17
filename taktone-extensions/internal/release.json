@@ -1,0 +1,13 @@
+{
+  "release": "TT2A",
+  "variant": "no-panel-diagnostics",
+  "hardware_tested": false,
+  "input_sha256": {
+    "digitakt": "9bdd44bb6102fb25c143cfab97bc92b7a89c463f795d3112dce89771e29bcc92",
+    "digitone": "c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa"
+  },
+  "output_sha256": {
+    "TT2A.syx": "e08baed97e92df050fbbb1cd51e8d966996a4d791f4fe67ab3fd837d6f667653",
+    "TT2A-recovery.syx": "1353f1ca933035ccca0ab7116871002556dc45d8cfcbb4f440e17a007f49083e"
+  }
+}
