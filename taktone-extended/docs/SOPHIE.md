@@ -1,6 +1,6 @@
 # Sophie machines
 
-Select an audio track, press FUNC+SRC and choose SOPHIE. Each of the eight audio tracks can select it independently; selection uses native machine ID 7 and is stored in sound/kit data. An assigned sample is unnecessary. Other machines keep their native source.
+Select an audio track, press FUNC+SYN1 (the Digitakt SRC action) and choose SOPHIE. Each of the eight audio tracks can select it independently; selection uses native machine ID 7 and is stored in sound/kit data. An assigned sample is unnecessary. Other machines keep their native source.
 
 | Knob | Control |
 | --- | --- |

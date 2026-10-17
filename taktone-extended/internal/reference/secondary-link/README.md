@@ -21,4 +21,4 @@ The driver also uses diagnostic words through status +`0x58`. Reserve/initialize
 
 The ready tag is `0x53503233` on both CPUs. Change both checks if changing its protocol meaning. Initialize main state and clear shared readiness before reset release. Preserve stock section-7 initialization through the engine substitution points (`0x40000B7A`, `0x40000B80`, `0x400008FA`); see the complete extensions builder for expected-byte checks and patch lengths.
 
-The reference uses the project's Ghidra-style assembly syntax. The extensions package's `assemble.py` translates this driver syntax for GNU binutils. Its main audio hook restores displaced `LEA 0x4199E444,A4`; do not reuse that wrapper at another site without preserving that site's original operation.
+The reference uses the project's Ghidra-style assembly syntax. The taktone-extended package's `assemble.py` translates this driver syntax for GNU binutils. Its main audio hook restores displaced `LEA 0x4199E444,A4`; do not reuse that wrapper at another site without preserving that site's original operation.

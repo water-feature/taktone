@@ -14,3 +14,6 @@ __pycache__/
 *.rep/
 /internal/reports/*
 !/internal/reports/panel-dn.json
+
+/converted/*
+!/converted/README.md

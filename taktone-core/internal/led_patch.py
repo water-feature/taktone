@@ -1,5 +1,6 @@
 """Translate LED slots and packed selectors at the UART boundary."""
 from metadata_paths import json_path
+from firmware_profiles import profile_for, DT153
 import json
 from pathlib import Path
 import struct
@@ -38,7 +39,7 @@ class Asm:
         return bytes(self.code)
 
 
-def slot_code(lut, flag, init_packet, init_size):
+def slot_code(lut, flag, init_packet, init_size, *, profile=DT153):
     a = Asm()
     a.emit('2f002f082f09')  # save d0/a0/a1
     a.absolute('4a39', flag)  # tst.b init flag
@@ -63,7 +64,7 @@ def slot_code(lut, flag, init_packet, init_size):
     return a.finish()
 
 
-def selector_code(lut, state):
+def selector_code(lut, state, *, profile=DT153):
     a = Asm()
     a.emit('4fefffe048d70cfc')  # reserve 32; save d2-d7/a2-a3
     a.emit('282f0024262f0028e58c7a03')  # group*4 -> d4; packed slots -> d3; loop 4
@@ -76,7 +77,7 @@ def selector_code(lut, state):
     # d0=physical bit shift, d1=mask, d6=physical group, d7=old packed slots
     a.emit('4681ce812203028100000003e1a98e8117876800')
     a.emit('2f072f06')  # packed slots, physical group
-    a.absolute('4eb9', 0x400E6238)  # original two-byte selector emitter
+    a.absolute('4eb9', profile.address(0x400E6238))  # original two-byte selector emitter
     a.emit('508f')
     a.label('next')
     a.emit('e48b52845385')  # next two source bits, next LED, decrement loop
@@ -87,6 +88,7 @@ def selector_code(lut, state):
 
 def make_led_patch(original, *, payload_base=TABLE):
     TABLE = payload_base
+    profile = profile_for(original)
     patched, details = make_patch(original, payload_base=TABLE)
     main = bytearray(patched[:len(original)])
     button_data = struct.pack('>105I', *(details['forward'] + details['inverse']))
@@ -103,12 +105,12 @@ def make_led_patch(original, *, payload_base=TABLE):
     while len(payload) % 4:
         payload.append(0)
     slot_at = TABLE + len(payload)
-    slots = slot_code(lut_at, flag_at, packet_at, len(packet))
+    slots = slot_code(lut_at, flag_at, packet_at, len(packet), profile=profile)
     payload.extend(slots)
     while len(payload) % 4:
         payload.append(0)
     selector_at = TABLE + len(payload)
-    selectors = selector_code(lut_at, state_at)
+    selectors = selector_code(lut_at, state_at, profile=profile)
     payload.extend(selectors)
     while len(payload) % 4:
         payload.append(0)
@@ -121,8 +123,8 @@ def make_led_patch(original, *, payload_base=TABLE):
         details['changes'].append(dict(address=hex(address), before=before.hex(), after=after.hex()))
 
     for site in [0x400E64EC, 0x400E67B8]:
-        replace(site, bytes.fromhex('4eb9400024c0'), bytes.fromhex('4eb9') + struct.pack('>I', slot_at))
-    replace(0x4020DB00, struct.pack('>I', 0x400E6238), struct.pack('>I', selector_at))
+        replace(profile.address(site), bytes.fromhex('4eb9400024c0'), bytes.fromhex('4eb9') + struct.pack('>I', slot_at))
+    replace(profile.address(0x4020DB00), struct.pack('>I', profile.address(0x400E6238)), struct.pack('>I', selector_at))
 
     # Same original startup hook as XDT1, with a larger copy count and aligned
     # payload. The RAM functions are copied before stock BSS clearing.

@@ -11,6 +11,8 @@ Each pattern has four scenes, on physical T1–T4. A scene holds absolute target
 | Hold scene + REC | Copy the complete scene |
 | Hold destination scene + STOP | Replace it with the copied scene |
 
+To keep an empty scene disabled after loading, toggle it off in TT2D or later and save the project.
+
 FUNC must already be held when T is pressed; pressing FUNC afterward does not toggle. The toggle press does not perform the scene. Only the first accepted scene hold owns editing/performance until release; other held scenes do not automatically take over. Pattern/project changes cancel the hold.
 
 Scene LEDs show enabled green or disabled off. Learned locks use the native inverted parameter boxes while the scene is held. Disabled-scene learning leaves underlying sound data and native sequencer locks intact. Capture is limited to audio-track sound providers; global FX/master and MIDI-track scene targets are unsupported. Scene amount/interpolation and LEVEL amount control are unimplemented.

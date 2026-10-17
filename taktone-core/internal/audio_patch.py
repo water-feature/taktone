@@ -1,5 +1,6 @@
 """Digitone codec bring-up with Digitakt audio buffers."""
 from metadata_paths import json_path
+from firmware_profiles import profile_for, DT153
 import json
 import struct
 
@@ -8,9 +9,9 @@ from led_patch import Asm
 from panel_patch import TABLE
 
 
-def codec_selector():
+def codec_selector(*, profile=DT153):
     a = Asm()
-    a.absolute('2039', 0x401F55C0)
+    a.absolute('2039', profile.address(0x401F55C0))
     a.emit('028000080000')
     a.branch('6600', 'old')
     a.emit('7000103900000000220002810000001f0c8100000004')
@@ -25,6 +26,7 @@ def codec_selector():
 
 def make_audio_patch(original, *, payload_base=TABLE):
     TABLE = payload_base
+    profile = profile_for(original)
     image, details = make_autosave_patch(original, payload_base=TABLE)
     main = bytearray(image[:len(original)])
     stub = bytearray(image[len(original):len(original) + details['stub_size']])
@@ -32,13 +34,13 @@ def make_audio_patch(original, *, payload_base=TABLE):
     while len(payload) % 4:
         payload.append(0)
     selector_at = TABLE + len(payload)
-    payload.extend(codec_selector())
+    payload.extend(codec_selector(profile=profile))
     while len(payload) % 4:
         payload.append(0)
     old_at = TABLE + len(payload)
     old = Asm()
     old.emit('4e9348780064')                 # SSI setup, then native delay 100
-    old.absolute('4eb9', 0x400E8A70)
+    old.absolute('4eb9', profile.address(0x400E8A70))
     old.emit('588f')
     # Original three old-codec register calls; initialize A2 as stock does.
     old.code.extend(original[0x40068FC2 - BASE:0x40068FE4 - BASE])

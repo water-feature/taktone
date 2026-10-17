@@ -1,7 +1,8 @@
-# taktone extensions — TT2D
+# taktone extended — TT2D
 
 Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2D firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
 
+SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
 ## Build
 
@@ -28,7 +29,7 @@ Use the exact stock SysEx files below. The patcher checks both complete-file SHA
 | Digitakt OS 1.53 | `9bdd44bb6102fb25c143cfab97bc92b7a89c463f795d3112dce89771e29bcc92` |
 | Digitone / Digitone Keys OS 1.43 | `c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa` |
 
-The stock Digitone download has Keys in its filename; Digitone Keys is untested.
+These packages target the original Digitone. The stock download has Keys in its filename; Digitone Keys is untested. Digitone II is not a build target.
 
 `patch.py` verifies the stock inputs, reconstructs the application using bundled `internal/patch-data.json`, and verifies both firmware envelopes against the exact release hashes before writing them. Unchanged firmware bytes, including the secondary loader and FPGA-containing secondary image, are copied from the user's stock inputs. The patch data stores source-copy references and compressed replacement bytes, not complete firmware files. Inputs are read directly without making local copies.
 
@@ -52,6 +53,22 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 | `TT2D-recovery.syx` | `e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9` |
 
 Project author confirmed scene initialization and scene-held encoder-push lock clearing on hardware.
+
+## Physical controls
+
+The panel uses Digitakt actions on the Digitone’s printed buttons:
+
+| Digitone control | TT2D action |
+| --- | --- |
+| MIDI | TRK / track selection |
+| SYN1 | SRC / source page |
+| VOICE | SAMPLE / recording screen |
+| SYN2 | Unassigned |
+| FLTR, AMP, LFO | Corresponding parameter pages |
+| T1–T4 | Hold scenes 1–4; FUNC+T toggles enabled state |
+| NOTE/KEYBOARD | Unassigned |
+
+Sophie knob D is unassigned. Encoder pushes A–H clear the corresponding scene lock while a scene is held on SRC, FLTR, AMP or LFO. See the [scene guide](docs/SCENES.md) for learning, copying and clearing scenes.
 
 ## Use and develop
 

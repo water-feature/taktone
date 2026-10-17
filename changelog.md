@@ -2,6 +2,17 @@
 
 TT1 versions identify the core firmware; TT2 versions identify the extensions firmware. Firmware binaries are built locally from user-supplied stock files.
 
+## Taktone patcher — 2026-10-18
+
+- Replace the core end-user workflow with one patcher for stock or compatible modified Digitakt 1.53 and 1.54 inputs; retain the historical TT1A build under `patch.py --release`.
+- Detect supported bases from exact stock metadata and native application fingerprints, independently of a mod's display label.
+- Add the reviewed 1.54 address profile and pinned recipe; preserve supplied boot versions and native firmware outside core patch regions.
+- Leave SYN2 unassigned in both current OS profiles; retain VOICE as SAMPLE/recording access. The archived TT1A release keeps its original mapping.
+- Recognize the observed Modwerk/elekloader startup template, preserve mod payloads, relocate core when needed, and chain startup initialization.
+- Retain container, decompression, flash-bound and ColdFire checks; report conflicts and unsupported bases.
+
+The user reported four supplied 1.53-based modified builds working on hardware. The 1.54 profile passed source/recipe, container and synthetic loader checks; no independently produced 1.54 mod, 1.54 hardware or Outbox qualification is claimed.
+
 ## TT2D — 2026-10-17
 
 - Route scene-held encoder presses through the focused parameter page’s native key handler, instead of using a widget cached during drawing.
@@ -28,7 +39,7 @@ Published to GitHub in commit `8e225dd`. Existing saved empty scenes could still
 
 ## TT2A — 2026-10-17
 
-- Initial taktone extensions publication: the core crossport plus four scenes per pattern and eight-track Sophie synthesis on the secondary ColdFire CPU.
+- Initial taktone extended publication: the core crossport plus four scenes per pattern and eight-track Sophie synthesis on the secondary ColdFire CPU.
 - Provide scene learning, enabled-state toggles, copy/paste/clear and instrument-local scene persistence.
 - Expose seven Sophie synthesis controls; knob D and NOTE/KEYBOARD are unassigned.
 - Use `TT2A` as the four-character firmware version label.

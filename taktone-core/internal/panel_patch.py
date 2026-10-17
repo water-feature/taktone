@@ -1,5 +1,6 @@
 """Measured Digitone button translation and startup payload copy."""
 from metadata_paths import json_path
+from firmware_profiles import profile_for
 import hashlib
 import json
 from pathlib import Path
@@ -15,11 +16,11 @@ from build_hybrid import DEV
 BASE = 0x40000400
 TABLE = 0x47BE0000
 # DN semantic code -> DT semantic code. Extra DN-only keys emit stock DT's
-# unused code zero for now. MIDI supplies TRK; VOICE and SYN2 supply SAMPLE.
+# unused code zero for now. MIDI supplies TRK; VOICE supplies SAMPLE; SYN2 is unassigned.
 KEYS = {0: 0, 1: 1, 2: 2, 3: 0, 4: 3, 5: 4, 6: 5, 7: 6,
         8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12, 14: 13,
         15: 14, 16: 15, 17: 16, 18: 17, 19: 18, 20: 19,
-        21: 20, 22: 7, 23: 21, 24: 22, 25: 23, 54: 48}
+        21: 20, 22: 0, 23: 21, 24: 22, 25: 23, 54: 48}
 KEYS.update({i: i - 2 for i in range(26, 42)})
 KEYS.update({i: 0 for i in range(42, 46)})
 KEYS.update({i: i - 6 for i in range(46, 54)})
@@ -27,6 +28,7 @@ KEYS.update({i: i - 6 for i in range(46, 54)})
 
 def make_patch(original, *, payload_base=TABLE):
     TABLE = payload_base
+    profile = profile_for(original)
     main = bytearray(original)
     records = json.loads((json_path(ROOT / 'panel-dn.json')).read_text())
     assert len(records) == 56
@@ -53,6 +55,7 @@ def make_patch(original, *, payload_base=TABLE):
     # All absolute operands referencing the two original button tables.
     for old, new, expected in [(0x4018E89C, TABLE, 3),
                                 (0x4018E7D8, TABLE + 56 * 4, 5)]:
+        old = profile.address(old)
         needle = struct.pack('>I', old)
         offsets = [i for i in range(len(main) - 3) if main[i:i + 4] == needle]
         assert len(offsets) == expected, (hex(old), offsets)
@@ -75,7 +78,7 @@ def make_patch(original, *, payload_base=TABLE):
     replace(0x40000538, bytes.fromhex('4eb940001c94'),
             bytes.fromhex('4eb9') + struct.pack('>I', stub_at))
     main.extend(stub + payload)
-    return bytes(main), dict(changes=changes, table_address=hex(TABLE),
+    return bytes(main), dict(base_version=profile.version, changes=changes, table_address=hex(TABLE),
         stub_address=hex(stub_at), stub_size=len(stub), table_size=len(payload),
         forward=forward, inverse=inverse,
         limitations=['Original Digitone mk1 only; Digitone Keys excluded', 'Physical worst-case deadlines and shutdown power margin unmeasured'])
