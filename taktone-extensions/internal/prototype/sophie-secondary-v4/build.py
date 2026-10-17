@@ -1,4 +1,4 @@
-"""Build isolated TT2A from frozen XDT15; never send firmware to hardware.
+"""Build isolated TT2B from frozen XDT15; never send firmware to hardware.
 
 Compile the original DigiSophie C engine for MCF54418; assemble the driver
 and kernel from the adjacent source files. No synthesis runs on main.
@@ -18,7 +18,7 @@ from assemble import assemble
 from audit_added_code import audit
 from retarget_transport import rewrap
 
-OUT = ROOT / 'candidates/TT2A-build'
+OUT = ROOT / 'candidates/TT2B-build'
 RAM = 0x43580000
 STATE = 0x4b584000
 S6 = 0x4b585000
@@ -58,7 +58,7 @@ def main():
              if len(row.split())==3}
     sc = dict(INIT_C=symbols['init_c'],RENDER_C=symbols['render_c'])
     kernel, sl = assemble((HERE / 'secondary.s').read_text(), KERNEL, sc,
-                          'TT2A-secondary-asm')
+                          'TT2B-secondary-asm')
     assert KERNEL + len(kernel) < VOICE
     secondary = bytearray(dn.section(7))
     secondary.extend(bytes(ENGINE - BASE - len(secondary)))
@@ -107,7 +107,7 @@ def main():
               OLD_FRAME=old_frame,AUDIO_C=ex['audio_c'],MACHINE_TICK=ex['core_mtick'],
               FAIL_STAGE=STATE+32,HELLO=STATE+36,ACK=STATE+40)
     driver, ml = assemble((HERE / 'main.s').read_text(), RAM, mc,
-                          'TT2A-main-asm')
+                          'TT2B-main-asm')
     assert len(driver) < 0x1000
     # Entire new region is initialized through the uncached DDR alias before
     # the original XDT15 startup stub runs. Its scene clear ends at RAM.
@@ -187,7 +187,7 @@ def main():
     for name,data in [('main.bin',image),('secondary.bin',secondary),
                       ('payload.bin',payload),('engine.bin',engine)]:
         (OUT/name).write_bytes(data)
-    report=dict(version='TT2A',hardware_tested=False,baseline_sha256=baseline.sha256,
+    report=dict(version='TT2B',hardware_tested=False,baseline_sha256=baseline.sha256,
                 main_sha256=sha(image),secondary_sha256=sha(secondary),
                 main_symbols=ml,extra_symbols=ex,changed_spans=hooks,machine_sites=sites,secondary_symbols=sl,main_constants=mc,
                 secondary_constants=sc,region=dict(start=hex(RAM),end=hex(RAM+len(payload))),
@@ -197,25 +197,25 @@ def main():
                 compiler_flags=flags)
     # Non-main container sections, including 6 and 7, remain byte-exact DN.
     # The driver serial-uploads its embedded customized section 7 instead.
-    raw=syx.write(dn,pack_section(bytes(image)),DEV,version='TT2A')
-    report['container']=syx.verify(raw,dn,bytes(image),DEV,version='TT2A')
+    raw=syx.write(dn,pack_section(bytes(image)),DEV,version='TT2B')
+    report['container']=syx.verify(raw,dn,bytes(image),DEV,version='TT2B')
     from metadata_paths import json_path
     baseline_info=json.loads(json_path(baseline_path.with_suffix('.json')).read_text())
     for suffix,data in [('recovery',raw),('from-XDT',rewrap(syx.Syx(raw),dt))]:
-        path=ROOT/('candidates/TT2A'+('-recovery' if suffix=='recovery' else '')+'.syx')
-        # Reproducible rebuilds may replace TT2A only. Never touch XDT15.
+        path=ROOT/('candidates/TT2B'+('-recovery' if suffix=='recovery' else '')+'.syx')
+        # Reproducible rebuilds may replace TT2B only. Never touch XDT15.
         path.write_bytes(data)
         reference=dn if suffix=='recovery' else syx.Syx(rewrap(dn,dt))
-        facts=syx.verify(data,reference,bytes(image),DEV,version='TT2A')
+        facts=syx.verify(data,reference,bytes(image),DEV,version='TT2B')
         info=dict(xdt15_baseline=baseline_info)
         for key in ('macro_symbols','inverse','forward','scene_controls',
                     'scene_capture','memory_reservation','macro_format_version'):
             info[key]=baseline_info[key]
-        info.update(facts,version='TT2A',hardware_tested=False,
+        info.update(facts,version='TT2B',hardware_tested=False,
                     status='local rebuild; see README for hardware-tested release status',
                     secondary_cpu_boot_added=True,fpga_startup_added=True,sophie_tracks=list(range(1,9)),
                     main_sha256=sha(image),secondary_sha256=sha(secondary),
-                    xsp4_build_report='candidates/TT2A-build/build.json',
+                    xsp4_build_report='candidates/TT2B-build/build.json',
                     limitations=['Physical worst-case deadlines and CPU utilization unmeasured',
                                  'One-block source latency',
                                  'Scene extensions absent from stock Transfer exports'])

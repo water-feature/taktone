@@ -51,13 +51,13 @@ def main():
         raise RuntimeError('Expected both recovery and running-XDT envelopes')
     report = dict(version=VERSION, variant="no-panel-diagnostics", input_sha256=EXPECTED, output_sha256=outputs,
                   verification='Stock round trips and both generated container verifications passed',
-                  hardware='NOTE LED and Sophie DSP knob indicators removed; TT2A has not been hardware-tested')
+                  hardware='NOTE LED and Sophie DSP knob indicators removed; TT2B has not been hardware-tested')
     (args.out/'build-report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     print('Output: '+str(args.out.resolve()))
 
-VERSION = 'TT2A'
-OUTPUT_GLOB = 'TT2A*.syx'
+VERSION = 'TT2B'
+OUTPUT_GLOB = 'TT2B*.syx'
 
 def build(dt,dn):
     from macro_patch import make_macro_patch

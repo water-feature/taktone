@@ -15,11 +15,11 @@ from build_hybrid import DEV
 BASE = 0x40000400
 TABLE = 0x47BE0000
 # DN semantic code -> DT semantic code. Extra DN-only keys emit stock DT's
-# unused code zero for now. MIDI supplies TRK; VOICE and SYN2 supply SAMPLE.
+# unused code zero for now. MIDI supplies TRK; VOICE supplies SAMPLE; SYN2 is unassigned.
 KEYS = {0: 0, 1: 1, 2: 2, 3: 0, 4: 3, 5: 4, 6: 5, 7: 6,
         8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12, 14: 13,
         15: 14, 16: 15, 17: 16, 18: 17, 19: 18, 20: 19,
-        21: 20, 22: 7, 23: 21, 24: 22, 25: 23, 54: 48}
+        21: 20, 22: 0, 23: 21, 24: 22, 25: 23, 54: 48}
 KEYS.update({i: i - 2 for i in range(26, 42)})
 KEYS.update({i: 0 for i in range(42, 46)})
 KEYS.update({i: i - 6 for i in range(46, 54)})

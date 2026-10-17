@@ -1,5 +1,5 @@
 {
-  "release": "TT2A",
+  "release": "TT2B",
   "variant": "no-panel-diagnostics",
   "hardware_tested": false,
   "input_sha256": {
@@ -7,7 +7,7 @@
     "digitone": "c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa"
   },
   "output_sha256": {
-    "TT2A.syx": "e08baed97e92df050fbbb1cd51e8d966996a4d791f4fe67ab3fd837d6f667653",
-    "TT2A-recovery.syx": "1353f1ca933035ccca0ab7116871002556dc45d8cfcbb4f440e17a007f49083e"
+    "TT2B-recovery.syx": "3e67a80898a879e5a71474e25d384d721d95d3fec3296a8f91fda1fef9b4e1b7",
+    "TT2B.syx": "dddf87caee6ecb20ab0e481a53d1e824d253a9d8ba9518affc7a190ba75d35a8"
   }
 }

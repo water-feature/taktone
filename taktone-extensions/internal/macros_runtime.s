@@ -756,6 +756,9 @@ startup_clear_aux:
  move.l D0,(A0)+
  subq.l #1,D1
  bne.w @startup_clear_aux
+ lea (@TABLE).l,A0
+ move.l #512,D1
+ jsr @macro_enable_empty_scenes
  move.l #@GUARD_MAGIC,D0
  move.l D0,(@GUARD_LOW).l
  move.l D0,(@GUARD_HIGH).l

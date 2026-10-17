@@ -29,6 +29,23 @@ clear_table_word:
  bne.w @clear_table_word
  rts
 
+macro_default_table:
+ jsr @macro_clear_table
+ movea.l A4,A0
+ move.l #512,D1
+ bra.w @macro_enable_empty_scenes
+
+; A0=cleared scene array, D1=scene count. No locks or edit marker are added.
+; Clobbers D0/D1/A0; saved scene states are restored by the load path.
+macro_enable_empty_scenes:
+ move.l #0x01000000,D0
+enable_empty_scene:
+ move.l D0,(A0)
+ lea (1024,A0),A0
+ subq.l #1,D1
+ bne.w @enable_empty_scene
+ rts
+
 macro_project_slot:
  cmpi.l #128,D0
  bhi.w @project_slot_bad
@@ -510,7 +527,7 @@ storage_tick_normal:
  cmpi.l #2,D0
  bne.w @storage_tick_ready
  lea (@TABLE).l,A4
- jsr @macro_clear_table
+ jsr @macro_default_table
  moveq 0,D0
  move.l D0,(@DIRTY).l
  moveq 1,D0

@@ -1,7 +1,9 @@
-# taktone extensions — TT2A
+# taktone extensions — TT2B
 
-Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2A firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
+Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2B firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
 
+
+SYN2 is unassigned. All four scenes start enabled on new or cleared patterns; saved enabled states are preserved.
 
 ## Build
 
@@ -37,8 +39,8 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Ru
 
 | Output | Receiver |
 | --- | --- |
-| `TT2A.syx` | Already running XDT firmware, including Elektron Transfer over USB |
-| `TT2A-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
+| `TT2B.syx` | Already running XDT firmware, including Elektron Transfer over USB |
+| `TT2B-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
 
 Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; stock Digitone project conversion/preservation is not established, and sample-volume formatting can erase data.
 
@@ -48,8 +50,8 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 
 | Output | SHA-256 |
 | --- | --- |
-| `TT2A.syx` | `e08baed97e92df050fbbb1cd51e8d966996a4d791f4fe67ab3fd837d6f667653` |
-| `TT2A-recovery.syx` | `1353f1ca933035ccca0ab7116871002556dc45d8cfcbb4f440e17a007f49083e` |
+| `TT2B.syx` | `dddf87caee6ecb20ab0e481a53d1e824d253a9d8ba9518affc7a190ba75d35a8` |
+| `TT2B-recovery.syx` | `3e67a80898a879e5a71474e25d384d721d95d3fec3296a8f91fda1fef9b4e1b7` |
 
 Hardware testing of this release has not been performed.
 

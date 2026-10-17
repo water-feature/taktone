@@ -137,6 +137,9 @@ pattern_memcpy_zero_word:
  move.l D0,(A3)+
  subq.l #1,D1
  bne.w @pattern_memcpy_zero_word
+ lea (-4096,A3),A0
+ moveq 4,D1
+ jsr @macro_enable_empty_scenes
  addq.l #1,(@EDIT_SEQ).l
 pattern_memcpy_done:
  move.l D5,D0
@@ -166,6 +169,9 @@ pattern_clear_word:
  move.l D0,(A0)+
  subq.l #1,D1
  bne.w @pattern_clear_word
+ lea (-4096,A0),A0
+ moveq 4,D1
+ jsr @macro_enable_empty_scenes
  addq.l #1,(@EDIT_SEQ).l
  moveq -1,D0
  move.l D0,(@HELD).l

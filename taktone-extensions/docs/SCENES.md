@@ -1,6 +1,6 @@
 # Scenes
 
-Each pattern has four scenes, on physical T1–T4. A scene holds absolute targets across audio tracks. It starts disabled so it can be learned silently. An enabled scene applies while its T button is held; release returns to the current sequencer values, including parameter locks that changed during the hold.
+Each pattern has four scenes, on physical T1–T4. A scene holds absolute targets across audio tracks. All four scenes start enabled with no learned targets. Existing saved enabled states are restored on load. Disable a scene with FUNC+T before learning if you want to learn silently. An enabled scene applies while its T button is held; release returns to the current sequencer values, including parameter locks that changed during the hold.
 
 | Gesture | Result |
 | --- | --- |
