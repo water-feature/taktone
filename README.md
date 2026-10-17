@@ -10,7 +10,7 @@ See the [changelog](changelog.md) for version history and release status.
 | [taktone-extensions](taktone-extensions/README.md) | TT2D - the above plus 4x scenes and 2nd coldfire proof of concept (digisophie machine) |
 |   |   |
 
-Both end-user patchers require only Python and its standard library. Each builds from user-supplied Digitakt 1.53 and Digitone 1.43 firmware. No firmware binaries or Elektron code are included. Do not distribute patched firmware files; point to this repo instead.
+Both end-user patchers require only Python and its standard library. Each builds from user-supplied Digitakt 1.53 and Digitone 1.43 firmware. No firmware binaries or Elektron code included. Do not distribute patched firmware files; point to this repo instead.
 
 To build either package, put your stock firmware files in that repository’s `firmware/` folder, then run `python3 patch.py` from that repository’s directory. See its README for the required filenames and firmware versions.
 
