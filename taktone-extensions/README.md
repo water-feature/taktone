@@ -2,7 +2,6 @@
 
 Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete TT2D firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
 
-SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
 ## Build
 
