@@ -2,7 +2,9 @@
 
 Two standalone source packages for running Digitakt 1 firmware on Digitone 1 hardware.
 
-Digitone has the same hardware as Digitakt, plus 6 extra buttons and a second Coldfire chip that normally handles the FM synthesis. Running the stock DT firmware is the starting point, and tools to do that are provided here, but this is also a starting point for further mods - the unused Coldfire provides much more DSP potential than a stock Digitakt. I've implemented a Digisophie machine as a proof of concept, and tested with 8x instances at ~50% load without choking or dropouts, vs 3-4 on a Digitakt. Note that this replaces the Digitone firmware entirely, no FM synthesis functionality is retained, though there is potential for patching it back in via a new machine.
+Digitone has the same hardware as Digitakt, plus 6 extra buttons and a second Coldfire chip that normally handles the FM synthesis. Running the stock DT firmware is the starting point, and tools to do that are provided here, but this is also a starting point for further mods - the unused Coldfire provides much more DSP potential than a stock Digitakt. I've implemented a Digisophie machine as a proof of concept, and tested with 8x instances at ~50% load without choking or dropouts, vs 3-4 on a Digitakt. These tools should also make it possible to run modified Digitakt firmware on Digitone too, though this is still untested. 
+
+Note that this replaces the Digitone firmware entirely, no FM synthesis functionality is retained, though there is potential for patching it back in via a new machine.
 
 See the [changelog](changelog.md) for version history and release status.
 
