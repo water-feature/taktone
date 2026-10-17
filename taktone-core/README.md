@@ -2,7 +2,6 @@
 
 taktone runs the Digitakt mk1 OS on original Digitone mk1 hardware. TT1A supplies the core crossport: button and LED translation, Digitone codec initialization, external audio I/O and shutdown autosave. The second ColdFire is idle in this build. The extensions package documents [secondary CPU and Sophie integration](../taktone-extensions/docs/SECONDARY-CPU.md).
 
-NOTE/KEYBOARD and T1–T4 are unassigned.
 
 ## Build
 
