@@ -8,7 +8,7 @@ Digitone runs almost identical hardware to Digitakt, plus 6 extra buttons and a 
 
 See the [changelog](changelog.md) for version history and release status.
 
-See [recovery](recovery.md) for which SysEx file to use, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
+Before starting, read [recovery](recovery.md), prepare firmware files and backup your machine data as everything will be erased. Ensure you have a midi cable and a midi interface for restoring the original DN firmware. 
 
 ## Developer guides
 
