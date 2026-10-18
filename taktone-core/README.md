@@ -4,7 +4,7 @@ Run Digitakt firmware on an original Digitone. The patcher supports Digitakt OS 
 
 It keeps the supplied firmware's mods and boot version, and adapts the buttons, LEDs, audio and shutdown saving for Digitone hardware. It detects the underlying OS version even when a mod has its own version label.
 
-This is for the original Digitone. Digitone II is not supported; Digitone Keys has not been tested.
+These packages target the original Digitone. Digitone Keys is untested. Digitone II is not a build target.
 
 Before starting read [recovery.md](../recovery.md), prepare firmware files and backup your machine data as everything will be erased. Ensure you have a midi cable and a midi interface for restoring the original DN firmware.
 
