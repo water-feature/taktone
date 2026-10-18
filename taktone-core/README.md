@@ -39,8 +39,6 @@ The finished files are saved in `converted/`.
 
 Both SysEx files install the same firmware. The output name uses your input filename without its `.syx` extension. The firmware keeps its boot version: an input labelled `1.54` or `2.0a` keeps that label.
 
-Back up your instrument before installing. Existing Digitone projects are not converted into Digitakt projects.
-
 ## First installation: format the +Drive
 
 **After first switching from stock Digitone firmware to taktone, format the +Drive before recording or transferring samples. Formatting erases the selected data; back up anything you want to keep before installing.**
