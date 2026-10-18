@@ -25,7 +25,7 @@ From the `taktone-core` folder, run:
 python3 patch.py
 ```
 
-The patcher converts one firmware file at a time. If you added one modified firmware to `firmware/`, it selects that file automatically. If there are several modified files, it displays a numbered list in the terminal: enter the number of the file you want to convert. If there are no modified files, it uses the available stock Digitakt firmware, or offers the same numbered choice when both 1.53 and 1.54 are present.
+The patcher converts one firmware file at a time. If you added one modified firmware to `firmware/`, it selects that file automatically. If there are several modified files, it displays a numbered list in the terminal: enter the number of the file you want to convert. 
 
 The finished files are saved in `converted/`.
 
