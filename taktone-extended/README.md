@@ -1,6 +1,7 @@
 # taktone extended
 
-Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file.
+Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the Digitakt 1 crossport. This package builds the complete firmware from stock inputs, including the core panel/audio/autosave adaptation. It does not require a core checkout or a prebuilt scenes firmware file. These packages target the original Digitone. Digitone Keys is untested. Digitone II is not a build target.
+
 
 SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
@@ -31,7 +32,6 @@ Use the exact stock SysEx files below. The patcher checks both complete-file SHA
 | Digitakt OS 1.53 | `9bdd44bb6102fb25c143cfab97bc92b7a89c463f795d3112dce89771e29bcc92` |
 | Digitone / Digitone Keys OS 1.43 | `c5a54cc05b921f2e4bd814834c5365c2a5aa01d7772a9a2961fac1c3095bf9aa` |
 
-These packages target the original Digitone. The stock download has Keys in its filename; Digitone Keys is untested. Digitone II is not a build target.
 
 `patch.py` verifies the stock inputs, reconstructs the application using bundled `internal/patch-data.json`, and verifies both firmware envelopes against the exact release hashes before writing them. Unchanged firmware bytes, including the secondary loader and FPGA-containing secondary image, are copied from the user's stock inputs. The patch data stores source-copy references and compressed replacement bytes, not complete firmware files. Inputs are read directly without making local copies.
 
