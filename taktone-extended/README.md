@@ -4,7 +4,7 @@ Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the
 
 SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
-Before starting read [recovery.md](../recovery.md).
+Before starting read [recovery.md](../recovery.md), prepare firmware files and backup your machine data as everything will be erased. Ensure you have a midi cable and a midi interface for restoring the original DN firmware.
 
 ## Build
 
