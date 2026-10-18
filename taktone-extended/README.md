@@ -43,8 +43,6 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Th
 | `taktone-extended-<version>.syx` | Already running XDT firmware, including Elektron Transfer over USB |
 | `taktone-extended-<version>-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
 
-Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; existing Digitone projects are not converted into Digitakt projects.
-
 
 ## First installation: format the +Drive
 
