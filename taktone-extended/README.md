@@ -68,8 +68,6 @@ The patcher verifies stock input hashes, container round trips, the reconstructe
 | `taktone-extended-<version>.syx` | `67a81cddb68751c4fc489b2523258a3db16a1a10e3dd2debeeed4ca88f47bf27` |
 | `taktone-extended-<version>-recovery.syx` | `e74cc3d2a1b75dd1de06790b329fd39ddb9d88edb0aa16ee69bd0d9762df7ce9` |
 
-Project author confirmed scene initialization and scene-held encoder-push lock clearing on hardware.
-
 ## Physical controls
 
 The panel uses Digitakt actions on the Digitone’s printed buttons:
@@ -84,7 +82,7 @@ The panel uses Digitakt actions on the Digitone’s printed buttons:
 | T1–T4 | Hold scenes 1–4; FUNC+T toggles enabled state |
 | NOTE/KEYBOARD | Unassigned |
 
-Sophie knob D is unassigned. Encoder pushes A–H clear the corresponding scene lock while a scene is held on SRC, FLTR, AMP or LFO. See the [scene guide](docs/SCENES.md) for learning, copying and clearing scenes.
+See the [scene guide](docs/SCENES.md) for learning, copying and clearing scenes.
 
 ## Use and develop
 
