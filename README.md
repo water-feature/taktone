@@ -1,6 +1,6 @@
 # taktone
 
-Digitone runs almost identical hardware to Digitakt, plus 6 extra buttons and a second Coldfire chip and FPGA. What if we could run DT firmware on DN hardware but harness that extra power? This repo provides two patchers:
+Digitone 1 runs almost identical hardware to Digitakt 1, plus 6 extra buttons and a second Coldfire chip and FPGA. What if we could run DT firmware on DN hardware but harness that extra power? This repo provides two patchers:
 
 [taktone-core](taktone-core/README.md) creates a Digitone-compatible firmware by converting any stock or modified Digitakt firmware based on 1.53 or 1.54.
 
