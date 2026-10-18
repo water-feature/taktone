@@ -82,8 +82,6 @@ The panel uses Digitakt actions on the Digitone’s printed buttons:
 | T1–T4 | Hold scenes 1–4; FUNC+T toggles enabled state |
 | NOTE/KEYBOARD | Unassigned |
 
-See the [scene guide](docs/SCENES.md) for learning, copying and clearing scenes.
-
 ## Use and develop
 
 - [Scene controls](docs/SCENES.md)
