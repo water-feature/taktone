@@ -41,7 +41,22 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Th
 | `taktone-extended-<version>.syx` | Already running XDT firmware, including Elektron Transfer over USB |
 | `taktone-extended-<version>-recovery.syx` | Digitone startup recovery receiver over physical MIDI IN |
 
-Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; stock Digitone project conversion/preservation is not established, and sample-volume formatting can erase data.
+Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; existing Digitone projects are not converted into Digitakt projects.
+
+See [firmware installation and recovery](../recovery.md) for why there are two files, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
+
+## First installation: format the +Drive
+
+**After first switching from stock Digitone firmware to taktone, format the +Drive before recording or transferring samples. Formatting erases the selected data; back up anything you want to keep before installing.**
+
+1. Boot into taktone after flashing.
+2. Open **SETTINGS > SYSTEM > FORMAT +DRIVE**.
+3. Select **PROJECTS+SOUNDS** and **SAMPLES**, then choose **ERASE SELECTED DATA** and confirm.
+4. Wait for formatting to finish before recording or transferring samples.
+
+This creates the sample filesystem taktone needs. Reaching the main screen does not mean sample storage is ready; skipping this step can leave recording saves and sample transfers unable to write to the drive.
+
+This is a first-installation step when switching from stock Digitone. Routine updates to an already working taktone installation, including switching between core and extended, do not require another format.
 
 ## Output verification
 

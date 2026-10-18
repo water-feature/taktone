@@ -37,7 +37,22 @@ The finished files are saved in `converted/`.
 
 Both SysEx files install the same firmware. The output name uses your input filename without its `.syx` extension. The firmware keeps its boot version: an input labelled `1.54` or `2.0a` keeps that label.
 
-Back up your instrument first. Setting up Digitakt sample storage may require formatting the drive, which erases its contents. Existing Digitone projects are not converted into Digitakt projects.
+See [firmware installation and recovery](../recovery.md) for why there are two files, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
+
+Back up your instrument before installing. Existing Digitone projects are not converted into Digitakt projects.
+
+## First installation: format the +Drive
+
+**After first switching from stock Digitone firmware to taktone, format the +Drive before recording or transferring samples. Formatting erases the selected data; back up anything you want to keep before installing.**
+
+1. Boot into taktone after flashing.
+2. Open **SETTINGS > SYSTEM > FORMAT +DRIVE**.
+3. Select **PROJECTS+SOUNDS** and **SAMPLES**, then choose **ERASE SELECTED DATA** and confirm.
+4. Wait for formatting to finish before recording or transferring samples.
+
+This creates the sample filesystem taktone needs. Reaching the main screen does not mean sample storage is ready; skipping this step can leave recording saves and sample transfers unable to write to the drive.
+
+This is a first-installation step when switching from stock Digitone. Routine updates to an already working taktone installation, including switching between core and extended, do not require another format.
 
 ## Controls
 

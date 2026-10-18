@@ -22,3 +22,11 @@ This folder contains two files that install the same firmware:
 The input name is used without its `.syx` extension: `Digitakt_OS1.53.syx` produces `taktone-Digitakt_OS1.53.syx` and `taktone-Digitakt_OS1.53-recovery.syx`. The firmware keeps the boot version from your input file. SYN2 is unassigned; VOICE opens the SAMPLE/recording screen.
 
 The patcher also writes `conversion-report.json`, which says whether conversion succeeded or why it was refused. If a file is unsupported or conflicts with the Digitone adaptations, the patcher stops without creating new firmware.
+
+## After first installation
+
+**When first switching from stock Digitone to taktone, format the +Drive before recording or transferring samples. Back up before installing: formatting erases the selected data.**
+
+After booting into taktone, open **SETTINGS > SYSTEM > FORMAT +DRIVE**, select **PROJECTS+SOUNDS** and **SAMPLES**, then choose **ERASE SELECTED DATA** and confirm. Wait for formatting to finish. See the [first-installation instructions](../README.md#first-installation-format-the-drive).
+
+Routine updates to an already working taktone installation do not require another format.

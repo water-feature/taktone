@@ -8,6 +8,8 @@ Digitone runs almost identical hardware to Digitakt, plus 6 extra buttons and a 
 
 See the [changelog](changelog.md) for version history and release status.
 
+See [recovery](recovery.md) for which SysEx file to use, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
+
 ## Developer guides
 
 - [Core architecture](taktone-core/docs/ARCHITECTURE.md)
