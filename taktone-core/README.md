@@ -1,6 +1,6 @@
 # taktone patcher
 
-Run Digitakt firmware on an original Digitone. The patcher supports **stock Digitakt OS 1.53 and 1.54**, plus compatible modified firmware. The same patcher handles supported inputs, including mods made with Modwerk or elekloader.
+Run Digitakt firmware on an original Digitone. The patcher supports Digitakt OS 1.53 and 1.54, including mods made with Modwerk or elekloader.
 
 It keeps the supplied firmware's mods and boot version, and adapts the buttons, LEDs, audio and shutdown saving for Digitone hardware. It detects the underlying OS version even when a mod has its own version label.
 
