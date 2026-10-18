@@ -6,6 +6,8 @@ It keeps the supplied firmware's mods and boot version, and adapts the buttons, 
 
 This is for the original Digitone. Digitone II is not supported; Digitone Keys has not been tested.
 
+Before starting read [recovery.md](../recovery.md), prepare firmware files and backup your machine data as everything will be erased. Ensure you have a midi cable and a midi interface for restoring the original DN firmware.
+
 ## What you need
 
 Install Python 3.12 or later. Put these original, unmodified files in the `firmware/` folder:
@@ -36,8 +38,6 @@ The finished files are saved in `converted/`.
 | `conversion-report.json` | Checking whether conversion succeeded or why it was refused |
 
 Both SysEx files install the same firmware. The output name uses your input filename without its `.syx` extension. The firmware keeps its boot version: an input labelled `1.54` or `2.0a` keeps that label.
-
-See [firmware installation and recovery](../recovery.md) for why there are two files, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
 
 Back up your instrument before installing. Existing Digitone projects are not converted into Digitakt projects.
 
