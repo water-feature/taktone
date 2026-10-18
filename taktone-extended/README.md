@@ -9,7 +9,7 @@ Before starting read [recovery.md](../recovery.md), prepare firmware files and b
 
 ## Build
 
-Requires **Python 3.12 or later only**, using its standard library. 
+Requires Python 3.12 or later only, using its standard library. 
 
 Place your two stock firmware files in this repository's `firmware/` folder, using these exact filenames:
 
