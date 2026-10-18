@@ -4,7 +4,7 @@ Digitone 1 runs almost identical hardware to Digitakt 1, plus 6 extra buttons an
 
 [taktone-core](taktone-core/README.md) creates a Digitone-compatible firmware by converting any stock or modified Digitakt firmware based on 1.53 or 1.54.
 
-[taktone-extended](taktone-extended/README.md) is a proof of concept for implementing the second Coldfire. It is based on stock DT 1.53 and adds 4 scenes on the DN track buttons, and Digisophie machines running on the second DSP.
+[taktone-extended](taktone-extended/README.md) is a proof of concept for allowing taktone to access the second Coldfire. It is based on stock DT 1.53 and adds 4 scenes on the DN track buttons, and Digisophie machines running on the second DSP.
 
 See the [changelog](changelog.md) for version history and release status.
 
