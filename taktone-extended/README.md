@@ -4,6 +4,8 @@ Scenes and secondary-CPU Sophie machines for the original Digitone 1 running the
 
 SYN2 is unassigned. All four scenes default to enabled, including untouched empty scenes in existing projects. Learned scenes retain their saved enabled state. Hold a scene and press A–H to clear that parameter’s scene lock.
 
+Before starting read [recovery.md](../recovery.md).
+
 ## Build
 
 Requires **Python 3.12 or later only**, using its standard library. 
@@ -43,7 +45,6 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Th
 
 Both contain the same application and preserve all stock Digitone non-main container sections. The customized secondary program is uploaded by main at runtime. Back up before installation; existing Digitone projects are not converted into Digitakt projects.
 
-See [firmware installation and recovery](../recovery.md) for why there are two files, startup upgrades over DIN MIDI, restoring stock Digitone firmware and checksum errors.
 
 ## First installation: format the +Drive
 
