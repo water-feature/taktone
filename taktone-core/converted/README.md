@@ -16,8 +16,10 @@ The patcher saves the finished files here in `converted/`. See the [setup instru
 
 This folder contains two files that install the same firmware:
 
-- **`taktone-<input filename>-recovery.syx`** — use the Digitone startup recovery menu and DIN MIDI IN when installing from stock Digitone firmware.
+- **`taktone-<input filename>-recovery.syx`** — use this for first installation from running stock Digitone through Transfer over USB, confirmed working on hardware by the project author. Stock Digitone OS 1.30 or later supports this Transfer update method. Use this file for startup upgrades over DIN MIDI too.
 - **`taktone-<input filename>.syx`** — use this when updating a Digitone already running taktone, including through Elektron Transfer over USB.
+
+DIN MIDI is required for startup-menu upgrades; the `-recovery` suffix itself does not require DIN. See [firmware installation and recovery](../../recovery.md) for both installation routes and their validation status.
 
 The input name is used without its `.syx` extension: `Digitakt_OS1.53.syx` produces `taktone-Digitakt_OS1.53.syx` and `taktone-Digitakt_OS1.53-recovery.syx`. The firmware keeps the boot version from your input file. SYN2 is unassigned; VOICE opens the SAMPLE/recording screen.
 

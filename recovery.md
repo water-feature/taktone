@@ -17,11 +17,14 @@ The Digitone startup upgrade receiver and the running taktone updater expect dif
 | Receiver | Expected addressing | File to send |
 | --- | --- | --- |
 | Digitone startup **OS UPGRADE** menu | Digitone | Taktone file ending in `-recovery.syx`, or original stock Digitone OS `.syx` |
+| Updater in running stock Digitone | Digitone | Taktone file ending in `-recovery.syx` for first installation through Transfer over USB; confirmed on hardware |
 | Updater in running taktone | Digitakt | Regular taktone `.syx` without `-recovery` |
 
 Taktone runs a Digitakt application on Digitone hardware. Its running updater therefore expects Digitakt-addressed messages, while the startup receiver retains Digitone addressing. The two generated files install the same firmware; their outer SysEx framing and transport checksums differ to match the receiver. The recovery file does not install a reduced or different edition of taktone.
 
 Stock Digitone uses Digitone addressing in both receivers, so Elektron supplies one stock OS file rather than a separate recovery file.
+
+**The `-recovery` suffix identifies Digitone addressing; it does not restrict the file to the startup menu or to DIN MIDI.** DIN is required specifically when using the startup menu. The file choice depends on which firmware is receiving the update, rather than whether this is your first installation.
 
 ## Where to find the files
 
@@ -30,6 +33,14 @@ Run the appropriate patcher with its required stock inputs:
 - **Core:** `taktone-core/converted/taktone-<input filename>.syx` and `taktone-<input filename>-recovery.syx`.
 - **Extended:** `taktone-extended/firmware/taktone-extended-<version>.syx` and `taktone-extended-<version>-recovery.syx`, unless you selected another output directory.
 - **Stock Digitone:** use the original, unmodified Digitone OS `.syx` downloaded from Elektron. The stock file used by these patchers is `Digitone_and_Digitone_Keys_OS1.43.syx`. It needs no conversion or recovery suffix.
+
+## First installation from running stock Digitone over USB
+
+**First installation from stock Digitone through Elektron Transfer over USB using the generated `-recovery.syx` file is confirmed working on hardware by the project author.** Stock Digitone OS 1.30 or later supports this Transfer update method.
+
+Boot normally into stock Digitone, connect it to Transfer over USB, and select the generated **`-recovery.syx`** file. Follow Transfer and instrument prompts. You do not need to enter the startup menu or use DIN MIDI for this installation route. Use the startup procedure below if the instrument cannot boot or you need to recover it.
+
+After first installation by either route, follow the +Drive formatting instructions in the [core](taktone-core/README.md#first-installation-format-the-drive) or [extended](taktone-extended/README.md#first-installation-format-the-drive) guide before recording or transferring samples. Back up before installation: formatting erases the selected data. Routine updates to an already working taktone installation do not require another format.
 
 ## Install or recover taktone through the startup menu
 
@@ -41,8 +52,6 @@ Run the appropriate patcher with its required stock inputs:
 
 **Startup upgrading requires DIN MIDI. The Digitone's USB port cannot receive the OS in this mode.** A USB-to-DIN MIDI interface connected to the computer is suitable; the connection into the instrument must be DIN MIDI.
 
-After your first switch from stock Digitone to taktone, follow the +Drive formatting instructions in the [core](taktone-core/README.md#first-installation-format-the-drive) or [extended](taktone-extended/README.md#first-installation-format-the-drive) guide before recording or transferring samples. Formatting erases the selected data. Routine updates to an already working taktone installation do not require another format.
-
 ## Update an instrument already running taktone
 
 Use the regular generated **`.syx` without `-recovery`** with the running taktone updater, including through Elektron Transfer over USB. This also applies when switching between core and extended. If the application cannot boot, use the startup procedure above with the recovery file instead.
@@ -53,4 +62,4 @@ First check that the file matches the receiver in the table above. A receiver mi
 
 If the error persists in the startup receiver with the correct file, record the exact message, OS filename, MIDI interface and whether the failure occurs during reception or after the transfer completes. Re-download an unmodified stock file from Elektron, or check a generated taktone file against its build report. Do not format the drive or perform a factory reset to troubleshoot a firmware checksum error.
 
-See Elektron's [SysEx upgrade instructions](https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer) and the [Digitone user manual, Startup Menu](https://www.elektron.se/wp-content/uploads/2024/09/Digitone_User_Manual_ENG_OS1.41_231108.pdf).
+See Elektron's [USB update instructions and minimum OS versions](https://support.elektron.se/support/solutions/articles/43000662890-how-to-update-your-device), [SysEx upgrade instructions](https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer) and the [Digitone user manual, Startup Menu](https://www.elektron.se/wp-content/uploads/2024/09/Digitone_User_Manual_ENG_OS1.41_231108.pdf).

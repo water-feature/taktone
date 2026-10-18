@@ -33,11 +33,11 @@ The finished files are saved in `converted/`.
 
 | File | When to use it |
 | --- | --- |
-| `taktone-<input filename>-recovery.syx` | Installing from stock Digitone firmware through the startup recovery menu, using DIN MIDI IN |
+| `taktone-<input filename>-recovery.syx` | First installation from running stock Digitone through Transfer over USB, or startup upgrade over DIN MIDI |
 | `taktone-<input filename>.syx` | Updating a Digitone already running taktone, including through Elektron Transfer over USB |
 | `conversion-report.json` | Checking whether conversion succeeded or why it was refused |
 
-Both SysEx files install the same firmware. The output name uses your input filename without its `.syx` extension. The firmware keeps its boot version: an input labelled `1.54` or `2.0a` keeps that label.
+Both SysEx files install the same firmware. The output name uses your input filename without its `.syx` extension. The firmware keeps its boot version: an input labelled `1.54` or `2.0a` keeps that label. The `-recovery` suffix identifies Digitone addressing; DIN MIDI is required only when using the startup menu.
 
 ## First installation: format the +Drive
 
