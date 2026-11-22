@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert Digitakt 1.53 or 1.54 firmware for original Digitone hardware, locally in your browser.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self'; connect-src 'self'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>taktone — Digitakt firmware on Digitone</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="ui.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>taktone</h1>
+  <p>Digitakt firmware on original Digitone hardware.</p>
+  <p>Independent community project. Not affiliated with Elektron.</p>
+  <nav aria-label="Page sections"><a href="#firmware">Patch firmware</a> · <a href="#instructions">Installation</a> · <a href="#documentation">Documentation</a></nav>
+  <hr>
+  <section id="firmware" aria-labelledby="firmware-heading">
+    <h2 id="firmware-heading">Create patched firmware</h2>
+    <p>Convert stock or compatible modified Digitakt 1.53 or 1.54 firmware for the original Digitone. This is the core patcher; scenes and Sophie machines belong to the separate extended package.</p>
+    <p>All firmware processing stays on your computer. Your firmware is never uploaded. There are no analytics or server-side patching. The patching engine downloads from this site when you start a build.</p>
+    <p>Before installing, <a href="https://github.com/water-feature/taktone/blob/main/recovery.md">read the recovery guide</a> and back up your instrument data. First installation requires preparing the +Drive and erases existing data. Keep generated firmware private.</p>
+    <p><label for="firmware-file">Modified Digitakt firmware to convert (leave empty for stock conversion)</label><br><input type="file" id="firmware-file" accept=".syx" aria-describedby="firmware-help firmware-status"></p>
+    <p id="firmware-help"></p>
+    <p><label for="digitone-file">Factory Digitone OS 1.43:</label><br><input type="file" id="digitone-file" accept=".syx" aria-describedby="digitone-help firmware-status"></p>
+    <p id="digitone-help"></p>
+    <p><label for="reference-file">Factory Digitakt OS (1.53 or 1.54 matching your modified firmware’s base version):</label><br><input type="file" id="reference-file" accept=".syx" aria-describedby="reference-help firmware-status"></p>
+    <p id="reference-help"></p>
+    <p><button type="button" id="firmware-create" disabled>Create patched firmware</button> <button type="button" id="firmware-cancel" hidden>Cancel</button></p>
+    <p id="firmware-status" role="status" aria-live="polite">Select factory Digitakt and Digitone firmware, plus modified firmware if converting a mod.</p>
+    <div id="downloads" aria-label="Verified downloads"></div>
+    <noscript><p>JavaScript is required. Use the <a href="https://github.com/water-feature/taktone/tree/main/taktone-core">Python patcher</a> instead.</p></noscript>
+    <details>
+      <summary>What the patcher changes</summary>
+      <p>Button and LED mapping, Digitone codec initialization and audio I/O, and shutdown autosave. The secondary ColdFire stays idle. VOICE opens SAMPLE; SYN2, NOTE/KEYBOARD and T1–T4 are unassigned.</p>
+      <p>Your input’s firmware version label is preserved. Converted mods retain their own features when compatible.</p>
+    </details>
+    <details>
+      <summary>What the patcher verifies</summary>
+      <p>The browser runs the current Python converter with the same exact stock hashes, version fingerprints, source/recipe checks, mod compatibility checks, ColdFire instruction audit, container checksums, flash bounds and decompression checks. Both output files must pass before either download appears.</p>
+      <p>Four supplied 1.53-based mods have user-reported hardware success. The 1.54 profile has software validation; separate hardware qualification is still needed. A successful conversion is not a hardware test.</p>
+    </details>
+  </section>
+  <hr>
+  <section id="instructions" aria-labelledby="instructions-heading">
+    <h2 id="instructions-heading">Install the converted firmware</h2>
+    <ol>
+      <li>Back up instrument data and read the <a href="https://github.com/water-feature/taktone/blob/main/recovery.md">installation and recovery guide</a>. Have a DIN MIDI interface and original Digitone firmware available for recovery.</li>
+      <li>Select your firmware files above, create the converted firmware and save both verified downloads and the report.</li>
+      <li>Use <code>taktone-…-recovery.syx</code> for the Digitone startup recovery receiver over physical DIN MIDI. Use <code>taktone-….syx</code> when updating from a running Digitakt-based installation. Follow the guide for first-install USB support and the correct receiver.</li>
+      <li>On first switching from stock Digitone, format the +DRIVE to create Digitakt sample storage.</li>
+    </ol>
+    <p></p>
+  </section>
+  <hr>
+  <section id="documentation" aria-labelledby="documentation-heading">
+    <h2 id="documentation-heading">Documentation and source</h2>
+    <ul>
+      <li><a href="https://github.com/water-feature/taktone">taktone repository</a></li>
+      <li><a href="https://github.com/water-feature/taktone/tree/main/taktone-core">Core Python patcher</a></li>
+      <li><a href="https://github.com/water-feature/taktone/blob/main/recovery.md">Installation and recovery</a></li>
+      <li><a href="https://github.com/water-feature/taktone/blob/main/taktone-core/docs/ARCHITECTURE.md">Core architecture</a></li>
+      <li><a href="https://github.com/water-feature/taktone/tree/main/taktone-extended">Extended: scenes and Sophie machines</a></li>
+      <li><a href="https://github.com/water-feature/taktone/blob/main/website/README.md">Browser implementation and verification</a></li>
+      <li><a href="https://github.com/water-feature/taktone/blob/main/CONTRIBUTING.md">Contributing and reporting bugs</a></li>
+    </ul>
+    <p>Use a current browser with WebAssembly and Web Crypto support. No account or Python installation is required. Loading the engine takes a download of about 14 MB, followed by local processing that may take several minutes.</p>
+    <p>Built with <a href="https://pyodide.org/">Pyodide</a>. Existing component licenses and upstream credits are retained; see the <a href="https://github.com/water-feature/taktone/blob/main/taktone-core/LICENSE.md">core license</a> and <a href="https://github.com/water-feature/taktone#acknowledgements">acknowledgements</a>.</p>
+  </section>
+</main>
+</body>
+</html>

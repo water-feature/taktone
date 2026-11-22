@@ -1,0 +1,44 @@
+SPDX-License-Identifier: MIT
+
+Copyright (C) 2026 water-feature and contributors
+
+This repository's own source code and documentation are licensed under the
+MIT License. The full license text is in LICENSE.
+
+This license covers this repository's own source code and documentation only.
+It does not extend to any Sequential firmware, which is not distributed here
+and remains the property of its copyright holder. Users supply their own
+copy of the official OS. The container-format tooling in this repository
+re-implements Sequential's firmware-update packaging solely for
+interoperability: so that an owner can build and flash a modified image for
+their own unit. Nothing in this project is endorsed by, supported by, or
+affiliated with Sequential. Prophet X and Sequential are trademarks of their
+respective owners, used only to identify the hardware this project targets.
+Third-party material remains subject to its own applicable license terms.
+
+Source provenance notes
+
+The direct builder's cache contains redacted compiler outputs of project-authored
+helpers. Matching factory spans are zero placeholders and are restored only from
+the user's verified factory input. Source/include and restored-object hashes,
+compiler metadata and extraction provenance are retained under
+firmware_builder/direct/. The derived publication manifest is distinguished from
+the original recording; it does not claim a new compiler recording. Content audits
+and provenance checks do not independently certify authorship or grant rights to
+manufacturer firmware.
+
+The MIT grant in LICENSE applies to this repository's own source files,
+including files retaining older GPL-2.0-or-later SPDX comments. This grant
+supersedes those project license headers. The headers are retained to preserve
+the exact source bytes pinned by the firmware tooling and evidence inventories.
+This does not replace or extend third-party licensing terms.
+
+The B13 boottrace sha.inc file contains 32 bytes of baseline application
+SHA-256 data, referenced by trace.asm; it is not a SHA implementation.
+The B16 VerifyB16Words.java and VerifyGeometryWords.java files are
+project-specific Ghidra verification scripts. They use Ghidra APIs; no
+Ghidra implementation source is included in those files. The B16
+native_mapper_test.cpp copies are project-specific ELF execution fixtures.
+Inspection found no third-party attribution or license notices in these
+helpers. This records the retained evidence, not an independent authorship
+certification. Report any missing attribution through a repository issue.

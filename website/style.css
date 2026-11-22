@@ -1,0 +1,17 @@
+body { margin: 24px; background: white; color: black; font: 16px/1.5 system-ui, sans-serif; }
+main { max-width: 52rem; }
+a, a:visited { color: #0000ee; text-decoration: underline; }
+h1 { margin-top: 0; }
+h2 { font-size: 1.25rem; }
+button, input { font: inherit; max-width: 100%; }
+button { padding: .3em .6em; }
+code { font-family: ui-monospace, monospace; overflow-wrap: anywhere; }
+hr { border: 0; border-top: 1px solid black; margin: 24px 0; }
+details { margin: 16px 0; }
+summary { cursor: pointer; }
+#firmware-status { overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid blue; outline-offset: 3px; }
+@media (max-width: 480px) { body { margin: 16px; } }
+
+.hash { overflow-wrap: anywhere; font-family: ui-monospace, monospace; font-size: .875rem; }
+[hidden] { display: none !important; }
