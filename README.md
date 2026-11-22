@@ -2,7 +2,7 @@
 
 Digitone 1 runs almost identical hardware to Digitakt 1, plus 6 extra buttons and a second Coldfire chip and FPGA. What if we could run DT firmware on DN hardware and also harness that extra power? This repo provides two patchers:
 
-[taktone-core](taktone-core/README.md) creates a Digitone-compatible firmware by converting any stock or modified Digitakt firmware based on 1.53 or 1.54.
+[taktone-core](https://water-feature.github.io/taktone) creates a Digitone-compatible firmware by converting any stock or modified Digitakt firmware based on 1.53 or 1.54.
 
 [taktone-extended](taktone-extended/README.md) is a proof of concept for allowing taktone to access the second Coldfire. It is based on stock DT 1.53 and adds 4 scenes on the DN track buttons, and Digisophie machines running on the second DSP.
 
