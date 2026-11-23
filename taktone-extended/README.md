@@ -46,6 +46,20 @@ Outputs go to `firmware/`, or to `--out output`, with a SHA-256 build report. Th
 The `-recovery` suffix identifies Digitone addressing; DIN MIDI is required only when using the startup menu.
 
 
+## Boot smoke test in DigiEmu
+
+Build the recovery SysEx as above. Set up a DigiEmu source checkout with its patched Unicorn environment. The checkout must include the ColdFire instruction-alignment fix from DigiEmu PR #42. To use the PR branch in a fresh checkout, run `git fetch origin refs/pull/42/head` and `git switch --detach FETCH_HEAD` from the DigiEmu directory. [DigiEmu source setup](https://github.com/elekloader/digiemu#from-source) · [DigiEmu PR #42](https://github.com/elekloader/digiemu/pull/42)
+
+From the `taktone-extended` directory, run this with the Python from DigiEmu’s environment:
+
+```sh
+/path/to/digiemu/.venv/bin/python boot_digiemu.py \
+  --digiemu /path/to/digiemu firmware/taktone-extended-TT2D-recovery.syx
+```
+
+The script checks that the recovery bootstrap starts Taktone, the UI settles, and the embedded secondary CPU image starts after the emulated upload. DigiEmu models the serial transfer. The smoke test uses a temporary workspace and exits with an error if any of these checks fail.
+
+
 ## First installation: format the +Drive
 
 **After first switching from stock Digitone firmware to taktone, format the +Drive before recording or transferring samples. Formatting erases the selected data; back up anything you want to keep before installing.**
